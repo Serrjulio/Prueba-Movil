@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557871593159",
+    "project_id": "prueba-movil-2935c",
+    "storage_bucket": "prueba-movil-2935c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557871593159:android:1e0fc933aa8a81849130e2",
+        "android_client_info": {
+          "package_name": "com.example.prueba_movil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557871593159-lerfrilcgqrg49rip423mdf9n613s6h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3xWi_Sf-_mi7Kbj-i4NjmQfkQREOpe_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557871593159-lerfrilcgqrg49rip423mdf9n613s6h7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
