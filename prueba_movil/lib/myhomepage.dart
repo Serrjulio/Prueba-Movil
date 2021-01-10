@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'answerPage.dart';
 
 class MyHomePage extends StatefulWidget{
   @override
@@ -10,17 +11,40 @@ class MyHomePage extends StatefulWidget{
 
 class _MyHomePageState extends State<MyHomePage>{
   List<Respuestas> respuestas = [];
-
+  List<String>Users=[];
   @override
   Widget build(BuildContext context) {
     getData().then((respuestas) => {
       this.respuestas = respuestas
     });
+
+    for(int i=0;i<respuestas.length;i++){
+      if(!Users.contains(respuestas[i].userId)){
+        Users.add(respuestas[i].userId);
+      }
+      print(Users);
+    }
+
+
   return Scaffold(
-    appBar: AppBar(title: Text("User's Menú"),),
-  );
+    appBar: AppBar(title: Text('FirebaseDatabase y ListView'),),
+    body: Center(child: Column(
+      children: Users.map((String data){
+        return RaisedButton(child: Text(data),
+                onPressed: (){
+                    click(data);
+                }
+              );
+      }).toList()
+      ,))
+    );
   }
 
+void click(data){
+  Navigator.push(
+    context,MaterialPageRoute(builder: (context)=> MyAnswerPage(data))
+  );
+}
 }
 
 final databaseReference = FirebaseDatabase.instance.reference();
@@ -69,3 +93,36 @@ Respuestas createMap(record){
   Respuestas respuesta = new Respuestas(atributtes['answer'], atributtes['userId']);
   return respuesta;
 }
+
+/*
+return Scaffold(
+appBar: AppBar(title: Text("User's Menú"),),
+body: Column(children: <Widget>[
+Expanded(child: ListView.builder(itemCount: this.respuestas.length, itemBuilder: (context,index){
+var respuesta = this.respuestas[index];
+return Card(
+elevation: 5,
+shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+child: Container(
+decoration: BoxDecoration(
+gradient: LinearGradient(
+colors:[
+Colors.pink,
+Colors.deepPurple
+],
+
+),
+borderRadius: BorderRadius.circular(20)
+),
+padding: EdgeInsets.all(20),
+child: Column(
+children: <Widget>[
+Text(respuesta.answer, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20, color: Colors.white) ),
+],
+)
+),
+);
+},))
+],),
+);
+}*/

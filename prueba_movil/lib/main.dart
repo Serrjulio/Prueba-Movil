@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Julio App',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.blueGrey,
+        backgroundColor: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(),
