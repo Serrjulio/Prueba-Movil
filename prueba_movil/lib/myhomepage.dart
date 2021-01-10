@@ -14,9 +14,13 @@ class _MyHomePageState extends State<MyHomePage>{
   List<String>Users=[];
   @override
   Widget build(BuildContext context) {
-    getData().then((respuestas) => {
-      this.respuestas = respuestas
+
+      getData().then((respuestas) => {
+        this.setState(() {
+        this.respuestas = respuestas;
+      })
     });
+
 
     for(int i=0;i<respuestas.length;i++){
       if(!Users.contains(respuestas[i].userId)){
@@ -26,17 +30,44 @@ class _MyHomePageState extends State<MyHomePage>{
 
 
   return Scaffold(
-    appBar: AppBar(title: Text('FirebaseDatabase y ListView'),),
-    body: Center(child: Column(
-      children: Users.map((String data){
-        return RaisedButton(child: Text(data),
-                onPressed: (){
-                    click(data);
-                }
+    appBar: AppBar(title: Text('Filtro de usuarios',style: Theme.of(context).textTheme.headline6,)),
+      resizeToAvoidBottomInset: false,
+    body: SingleChildScrollView(child: Center(
+        child: Wrap(spacing: 15.0, runSpacing: 12.0,
+          children: Users.map((String data){
+            return InkWell(onTap: () => click(data),
+              child: Container(width: 150.0,
+                  decoration: BoxDecoration(
+                      boxShadow: [BoxShadow(offset: Offset(0.0,1.0),blurRadius: 5.0, color: Colors.black),],
+                      color: Colors.white, borderRadius: BorderRadius.circular(22.0)),
+                  child: Wrap(
+                      children: <Widget>[
+                        Container(
+                          height: 70.0,
+                          width: 115.0,
+                          padding: EdgeInsets.only(left: 10.0, top: 10.0, right:15.0, bottom:5.0),
+                          child: Text(data, style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500, fontSize: 16.0)),
+                          decoration: BoxDecoration(
+                              //color: Colors.deepPurpleAccent,
+                            gradient: LinearGradient(colors: [Colors.pink, Colors.deepPurple]),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(50.0),
+                                topLeft: Radius.circular(50.0),
+                                bottomRight: Radius.circular(160.0),
+                              )
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(left: 0.0,top: 20.0,right: 0.0, bottom: 0.0),
+                          child: Icon(Icons.person,size: 30.0, ),),
+                      ]
+                  )
+              ),
               );
-      }).toList()
-      ,))
-    );
+          }).toList()
+          ,)
+    )
+    )
+  );
   }
 
 void click(data){
@@ -45,6 +76,11 @@ void click(data){
   );
 }
 }
+/*RaisedButton(child: Text(data),
+onPressed: (){
+click(data);
+}
+);*/
 
 final databaseReference = FirebaseDatabase.instance.reference();
 

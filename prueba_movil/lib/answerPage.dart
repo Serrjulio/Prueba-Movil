@@ -23,7 +23,7 @@ class _MyAnswerPage extends State<MyAnswerPage> {
       }
     }
     return Scaffold(
-      appBar: AppBar(title: Text('FirebaseDatabase y ListView'),),
+      appBar: AppBar(title: Text('Respuestas del usuario'),),resizeToAvoidBottomInset: false,
       body: Column(children: <Widget>[
         Expanded(child: ListView.builder(itemCount: AnswerList.length, itemBuilder: (context,index){
           var respuesta = AnswerList[index];
@@ -41,7 +41,7 @@ class _MyAnswerPage extends State<MyAnswerPage> {
                     ),
                     borderRadius: BorderRadius.circular(20)
                 ),
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(15),
                 child: Column(
                   children: <Widget>[
                     Text(respuesta, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white) ),
