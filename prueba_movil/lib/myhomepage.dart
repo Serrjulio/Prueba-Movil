@@ -22,7 +22,6 @@ class _MyHomePageState extends State<MyHomePage>{
       if(!Users.contains(respuestas[i].userId)){
         Users.add(respuestas[i].userId);
       }
-      print(Users);
     }
 
 
@@ -42,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage>{
 
 void click(data){
   Navigator.push(
-    context,MaterialPageRoute(builder: (context)=> MyAnswerPage(data))
+    context,MaterialPageRoute(builder: (context)=> MyAnswerPage(data,this.respuestas))
   );
 }
 }
@@ -71,13 +70,7 @@ class Respuestas{
   String userId;
 
   Respuestas(this.answer,this.userId);
-
-  Map<String, String> toJson(){
-    return{
-      'answer': this.answer,
-      'userId': this.userId
-    };
-  }
+  
 }
 
 Respuestas createMap(record){
@@ -93,36 +86,3 @@ Respuestas createMap(record){
   Respuestas respuesta = new Respuestas(atributtes['answer'], atributtes['userId']);
   return respuesta;
 }
-
-/*
-return Scaffold(
-appBar: AppBar(title: Text("User's Menú"),),
-body: Column(children: <Widget>[
-Expanded(child: ListView.builder(itemCount: this.respuestas.length, itemBuilder: (context,index){
-var respuesta = this.respuestas[index];
-return Card(
-elevation: 5,
-shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-child: Container(
-decoration: BoxDecoration(
-gradient: LinearGradient(
-colors:[
-Colors.pink,
-Colors.deepPurple
-],
-
-),
-borderRadius: BorderRadius.circular(20)
-),
-padding: EdgeInsets.all(20),
-child: Column(
-children: <Widget>[
-Text(respuesta.answer, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20, color: Colors.white) ),
-],
-)
-),
-);
-},))
-],),
-);
-}*/
