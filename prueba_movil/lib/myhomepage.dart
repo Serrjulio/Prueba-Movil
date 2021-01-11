@@ -21,13 +21,11 @@ class _MyHomePageState extends State<MyHomePage>{
       })
     });
 
-
     for(int i=0;i<respuestas.length;i++){
       if(!Users.contains(respuestas[i].userId)){
         Users.add(respuestas[i].userId);
       }
     }
-
 
   return Scaffold(
     appBar: AppBar(title: Text('Filtro de usuarios',style: Theme.of(context).textTheme.headline6,)),
@@ -103,22 +101,32 @@ Future<List<Respuestas>> getData() async{
 
 class Respuestas{
   String answer;
+  String guideId;
   String userId;
+  int timestamp;
 
-  Respuestas(this.answer,this.userId);
+  Respuestas(this.answer,this.guideId, this.userId, this.timestamp);
   
 }
 
+
 Respuestas createMap(record){
-  Map<String, String> atributtes = {
+  Map<String, dynamic> atributtes = {
     'answer': '',
-    'userId': ''
+    'guideId': '',
+    'userId': '',
+    'timestamp': []
   };
   record.forEach((key,value) => {
-    if(key == 'answer' || key == 'userId'){
-      atributtes[key] = value
+    if(key == 'answer' || key == 'userId' || key == 'guideId' || key == 'timestamp' || key=='timeStamp'){
+      if(key=='timeStamp' || key == 'timestamp'){
+        atributtes['timestamp']=value
+      }else
+        {
+          atributtes[key] = value
+        }
     }
   });
-  Respuestas respuesta = new Respuestas(atributtes['answer'], atributtes['userId']);
+  Respuestas respuesta = new Respuestas(atributtes['answer'], atributtes['guideId'], atributtes['userId'], atributtes['timestamp']);
   return respuesta;
 }
